@@ -1,6 +1,7 @@
 package spring.project.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +22,7 @@ public class Answer {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
-	private Timestamp writeday;
+	private LocalDateTime writeday;
 
 	@ManyToOne
 	private Question question;

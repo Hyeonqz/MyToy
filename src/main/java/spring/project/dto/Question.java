@@ -1,6 +1,7 @@
 package spring.project.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -26,10 +27,10 @@ public class Question {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
-	private Timestamp wirteday;
+	private LocalDateTime wirteday;
 
 	//질문 하나에는 여러개의 답변이 작성 될 수 있다.
 	//이때 질문 삭제시 그에 달린 모든 답변또한 삭제 -> sql cascade랑 같은 역할.
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-	private List<Answer> answerrList;
+	private List<Answer> answerList;
 }
