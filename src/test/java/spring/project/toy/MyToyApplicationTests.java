@@ -14,16 +14,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import spring.project.dto.Question;
 import spring.project.repository.QuestionRepository;
+import spring.project.service.QuestionService;
 
 @SpringBootTest
 class MyToyApplicationTests {
 
 	@Autowired
 	private QuestionRepository questionRepository;
+	@Autowired
+	private QuestionService questionService;
 	@Test
 	void contextLoads() {
 	}
-	@Test
+/*	@Test
 	void findByIdTest() {
 		Optional<Question> oq = this.questionRepository.findById(5);
 		if(oq.isPresent()) {
@@ -61,6 +64,14 @@ class MyToyApplicationTests {
 		Question q = oq.get();
 		this.questionRepository.delete(q);
 		assertEquals(5, this.questionRepository.count());
+	}*/
+	@Test
+	public void LargeScale() {
+		for (int i = 0; i < 300; i++) {
+			String subject = String.format("테스트 데이터 입니다 :[%03d]",i);
+			String content = "내용은 없다ㅋ";
+			this.questionService.create(subject, content);
+		}
 	}
 
 
