@@ -1,6 +1,9 @@
 package spring.project.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +31,7 @@ public class SiteUser {
 	@Column(unique = true)
 	private String email;
 
-	@Column(unique = true)
+	@Column
 	private String addr;
 
 	@Column

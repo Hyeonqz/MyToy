@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import spring.project.dto.Question;
+import spring.project.dto.SiteUserForm;
 import spring.project.repository.QuestionRepository;
+import spring.project.repository.UserRepository;
 import spring.project.service.QuestionService;
+import spring.project.service.UserService;
 
 @SpringBootTest
 class MyToyApplicationTests {
@@ -23,6 +26,8 @@ class MyToyApplicationTests {
 	private QuestionRepository questionRepository;
 	@Autowired
 	private QuestionService questionService;
+	@Autowired
+	private UserService userService;
 	@Test
 	void contextLoads() {
 	}
@@ -65,14 +70,14 @@ class MyToyApplicationTests {
 		this.questionRepository.delete(q);
 		assertEquals(5, this.questionRepository.count());
 	}*/
-	@Test
+/*	@Test
 	public void LargeScale() {
 		for (int i = 0; i < 300; i++) {
 			String subject = String.format("테스트 데이터 입니다 :[%03d]",i);
 			String content = "내용은 없다ㅋ";
 			this.questionService.create(subject, content);
 		}
-	}
+	}*/
 
 
 }
