@@ -79,5 +79,14 @@ class MyToyApplicationTests {
 		}
 	}*/
 
+	@Test
+	public void TestAuthor() {
+		for (int i = 0; i <=300 ; i++) {
+			String subject = String.format("테스트 데이터 입니다:[%03d]",i);
+			String content = "정상 작동";
+
+			this.questionService.create(subject, content,null);
+		}
+	}
 
 }

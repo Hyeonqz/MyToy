@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
@@ -33,4 +34,9 @@ public class Question {
 	//이때 질문 삭제시 그에 달린 모든 답변또한 삭제 -> sql cascade랑 같은 역할.
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answerList;
+
+	@ManyToOne
+	private SiteUser author;
+	//여러개의 질문이 한명의 사용자에게 요청될 수 있음
+	private LocalDateTime modifyDate;
 }

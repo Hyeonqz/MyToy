@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import spring.project.dto.Answer;
 import spring.project.dto.Question;
+import spring.project.dto.SiteUser;
 import spring.project.repository.AnswerRepository;
 
 @Service
@@ -16,11 +17,13 @@ import spring.project.repository.AnswerRepository;
 public class AnswerService {
 	private final AnswerRepository answerRepository;
 
-	public void create(Question question, String content) {
+	public Answer create(Question question, String content, SiteUser author) {
 		Answer answer = new Answer();
 		answer.setContent(content);
 		answer.setWriteday(LocalDateTime.now());
 		answer.setQuestion(question);
+		answer.setAuthor(author);
 		this.answerRepository.save(answer);
+		return answer;
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.dto.Question;
+import spring.project.dto.SiteUser;
 import spring.project.repository.QuestionRepository;
 import spring.project.toy.DataNotFoundException;
 
@@ -22,7 +23,9 @@ public class QuestionService {
 
 	private final QuestionRepository questionRepository;
 
+	//전체 조회 메소드
 	public List<Question> getList() {
+
 		return this.questionRepository.findAll();
 	}
 
@@ -36,19 +39,30 @@ public class QuestionService {
 		}
 	}
 
-	public void create(String subject, String content) {
+	//insert 메소드
+	public void create(String subject, String content, SiteUser author) {
 		Question q = new Question();
 		q.setSubject(subject);
 		q.setContent(content);
 		q.setWirteday(LocalDateTime.now());
+		q.setAuthor(author);
 		this.questionRepository.save(q);
 	}
 
+	//페이징 메소드
 	public Page<Question> getList(int page) {
 		List<Sort.Order> sorts = new ArrayList<Sort.Order>();
 		sorts.add(Sort.Order.desc("wirteday"));
 		Pageable pageable = PageRequest.of(page,10, Sort.by(sorts));
 		return this.questionRepository.findAll(pageable);
+	}
+
+	//수정 메소드
+	public void modify(Question question, String subject, String content) {
+		question.setSubject(subject);
+		question.setContent(content);
+		question.setModifyDate(LocalDateTime.now());
+		this.questionRepository.save(question);
 	}
 
 }
