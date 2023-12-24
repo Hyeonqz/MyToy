@@ -65,4 +65,9 @@ public class QuestionService {
 		this.questionRepository.save(question);
 	}
 
+	//삭제 메소드
+	public void delete(Question question) {
+		this.questionRepository.delete(question);
+	}
+
 }

@@ -112,4 +112,17 @@ public class QuestionController {
 		System.out.println("현재 글 id값 : " + id);
 		return String.format("redirect:/question/detail/%s", id);
 	}
+
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/delete/{id}")
+	public String delete(Principal principal, @PathVariable("id") Integer id) {
+		Question question = this.questionService.getQuestion(id);
+		if(!question.getAuthor().getUsername().equalsIgnoreCase(principal.getName())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다");
+		}
+		if(question.getAuthor().getUsername().equalsIgnoreCase(principal.getName())) {
+			this.questionService.delete(question);
+		}
+		return "redirect:/question/list";
+	}
 }
