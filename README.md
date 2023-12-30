@@ -15,3 +15,9 @@ Java
 [https://spring.io](https://spring.io)
 
 > ref : https://wikidocs.net/162799
+
+<b>개발 환경</b><br>
+Springboot, JPA, Mysql
+
+<b>빌드</b><br>
+Gradle
