@@ -9,9 +9,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
+import spring.project.dto.Answer;
 import spring.project.dto.Question;
 import spring.project.dto.SiteUser;
 import spring.project.repository.QuestionRepository;
@@ -50,11 +58,13 @@ public class QuestionService {
 	}
 
 	//페이징 메소드
-	public Page<Question> getList(int page) {
+	public Page<Question> getList(int page, String keywords) {
 		List<Sort.Order> sorts = new ArrayList<Sort.Order>();
 		sorts.add(Sort.Order.desc("wirteday"));
 		Pageable pageable = PageRequest.of(page,10, Sort.by(sorts));
-		return this.questionRepository.findAll(pageable);
+		Specification<Question> specification = search(keywords);
+		return this.questionRepository.findAll(specification,pageable);
+		//return this.questionRepository.findAllByKeyword(keywords,pageable); (쿼리 사용시)
 	}
 
 	//수정 메소드
@@ -74,6 +84,25 @@ public class QuestionService {
 	public void vote(Question question, SiteUser siteUser) {
 		question.getVoter().add(siteUser);
 		this.questionRepository.save(question);
+	}
+
+	//검색 메소드
+	private Specification<Question> search(String keywords) {
+		return new Specification<>() {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public Predicate toPredicate(Root<Question> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				query.distinct(true);  // 중복을 제거
+				Join<Question, SiteUser> u1 = q.join("author", JoinType.LEFT);
+				Join<Question, Answer> a = q.join("answerList", JoinType.LEFT);
+				Join<Answer, SiteUser> u2 = a.join("author", JoinType.LEFT);
+				return cb.or(cb.like(q.get("subject"), "%" + keywords + "%"), // 제목
+					cb.like(q.get("content"), "%" + keywords + "%"),      // 내용
+					cb.like(u1.get("username"), "%" + keywords + "%"),    // 질문 작성자
+					cb.like(a.get("content"), "%" + keywords + "%"),      // 답변 내용
+					cb.like(u2.get("username"), "%" + keywords + "%"));   // 답변 작성자
+			}
+		};
 	}
 
 }

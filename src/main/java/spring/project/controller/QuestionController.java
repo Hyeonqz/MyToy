@@ -34,7 +34,6 @@ public class QuestionController {
 	//Requiredargsconstructor 는 questionRepository 속성을 포함하는 생성자를 생성한다.
 	//final이 붙은 속성을 포함하는 생성자를 자동으로 생성하는 역할을 한다.
 	//이 어노테이션 때문에 questionRepository가 bean이 주입이 된다.
-
 	private final QuestionService questionService;
 	private final UserService userService;
 
@@ -47,9 +46,11 @@ public class QuestionController {
 
 	@GetMapping("/list")
 	public String list(Model model,
-		@RequestParam(value = "page", defaultValue = "0") int page) {
-		Page<Question> paging = this.questionService.getList(page);
+		@RequestParam(value = "page", defaultValue = "0") int page,
+		@RequestParam(value="keywords", defaultValue = "") String keywords) {
+		Page<Question> paging = this.questionService.getList(page, keywords);
 		model.addAttribute("paging", paging);
+		model.addAttribute("keywords",keywords);
 		return "question_list";
 	}
 

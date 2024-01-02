@@ -44,4 +44,7 @@ public class Question {
 
 	@ManyToMany
 	Set<SiteUser> voter;
+
+	@ManyToOne
+	private Answer answer;
 }
