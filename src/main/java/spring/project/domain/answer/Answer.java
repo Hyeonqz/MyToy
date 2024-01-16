@@ -1,6 +1,5 @@
-package spring.project.dto;
+package spring.project.domain.answer;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -13,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import spring.project.domain.question.Question;
+import spring.project.domain.site.SiteUser;
 
 @Data
 @Entity

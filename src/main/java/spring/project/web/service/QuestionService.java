@@ -1,4 +1,4 @@
-package spring.project.service;
+package spring.project.web.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
-import spring.project.dto.Answer;
-import spring.project.dto.Question;
-import spring.project.dto.SiteUser;
-import spring.project.repository.QuestionRepository;
+import spring.project.domain.answer.Answer;
+import spring.project.domain.question.Question;
+import spring.project.domain.site.SiteUser;
+import spring.project.domain.question.QuestionRepository;
 import spring.project.toy.DataNotFoundException;
 
 @RequiredArgsConstructor

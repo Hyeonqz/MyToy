@@ -1,17 +1,15 @@
-package spring.project.service;
+package spring.project.web.service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.dto.Answer;
-import spring.project.dto.Question;
-import spring.project.dto.SiteUser;
-import spring.project.repository.AnswerRepository;
+import spring.project.domain.answer.Answer;
+import spring.project.domain.question.Question;
+import spring.project.domain.site.SiteUser;
+import spring.project.domain.answer.AnswerRepository;
 import spring.project.toy.DataNotFoundException;
 
 @Service

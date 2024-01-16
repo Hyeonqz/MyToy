@@ -1,4 +1,4 @@
-package spring.project.dto;
+package spring.project.domain.question;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

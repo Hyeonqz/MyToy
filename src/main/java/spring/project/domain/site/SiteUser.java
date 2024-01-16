@@ -1,4 +1,4 @@
-package spring.project.dto;
+package spring.project.domain.site;
 
 import java.time.LocalDateTime;
 import java.util.List;

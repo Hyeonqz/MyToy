@@ -1,4 +1,4 @@
-package spring.project.service;
+package spring.project.web.service;
 
 import lombok.Getter;
 

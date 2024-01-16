@@ -1,4 +1,4 @@
-package spring.project.service;
+package spring.project.web.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.dto.SiteUser;
-import spring.project.repository.UserRepository;
+import spring.project.domain.site.SiteUser;
+import spring.project.domain.site.UserRepository;
 
 @Service
 @RequiredArgsConstructor

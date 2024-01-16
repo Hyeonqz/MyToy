@@ -1,4 +1,4 @@
-package spring.project.controller;
+package spring.project.web.controller;
 
 import java.security.Principal;
 
@@ -11,19 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import spring.project.dto.Answer;
-import spring.project.dto.AnswerForm;
-import spring.project.dto.Question;
-import spring.project.dto.SiteUser;
-import spring.project.repository.AnswerRepository;
-import spring.project.service.AnswerService;
-import spring.project.service.QuestionService;
-import spring.project.service.UserService;
+import spring.project.domain.answer.Answer;
+import spring.project.domain.answer.AnswerForm;
+import spring.project.domain.question.Question;
+import spring.project.domain.site.SiteUser;
+import spring.project.web.service.AnswerService;
+import spring.project.web.service.QuestionService;
+import spring.project.web.service.UserService;
 
 @RequiredArgsConstructor
 @Controller
@@ -46,7 +44,7 @@ public class AnswerController {
 
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("question",question);
-			return "question_detail";
+			return "question/question_detail";
 		}
 		Answer answer = this.answerService.create(question,
 			answerForm.getContent(), siteUser);
@@ -63,7 +61,7 @@ public class AnswerController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다");
 		}
 		answerForm.setContent(answer.getContent()); //수정 전 내용 가져오기
-		return "answer_form";
+		return "answer/answer_form";
 	}
 
 	@PreAuthorize("isAuthenticated()")
@@ -71,7 +69,7 @@ public class AnswerController {
 	public String answerModify(@Valid AnswerForm answerForm, BindingResult bindingResult
 	, @PathVariable("id") Integer id, Principal principal) {
 		if(bindingResult.hasErrors()) {
-			return "answer_form";
+			return "answer/answer_form";
 		}
 		Answer answer = this.answerService.getAnswer(id);
 		if(!answer.getAuthor().getUsername().equals(principal.getName())) {

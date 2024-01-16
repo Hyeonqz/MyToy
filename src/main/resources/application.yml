@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 9001
 
 spring:
   datasource:
@@ -19,7 +19,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
 
 thymeleaf:
-  prefix: classpath:src/main/resources/
+  prefix: /templates/
   check-template-location: true
   suffix: .html
   mode: HTML5

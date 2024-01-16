@@ -1,4 +1,4 @@
-package spring.project.repository;
+package spring.project.domain.question;
 
 import java.util.List;
 
@@ -6,10 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import spring.project.dto.Question;
+import spring.project.domain.question.Question;
 
 public interface QuestionRepository extends JpaRepository<Question,Integer> {
 	Question findBySubject(String subject);

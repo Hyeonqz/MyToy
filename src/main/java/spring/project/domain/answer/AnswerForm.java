@@ -1,4 +1,4 @@
-package spring.project.dto;
+package spring.project.domain.answer;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

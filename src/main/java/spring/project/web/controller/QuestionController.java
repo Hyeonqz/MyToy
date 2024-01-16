@@ -1,11 +1,9 @@
-package spring.project.controller;
+package spring.project.web.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +17,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import spring.project.dto.AnswerForm;
-import spring.project.dto.Question;
-import spring.project.dto.QuestionForm;
-import spring.project.dto.SiteUser;
-import spring.project.service.QuestionService;
-import spring.project.service.UserService;
+import spring.project.domain.answer.AnswerForm;
+import spring.project.domain.question.Question;
+import spring.project.domain.question.QuestionForm;
+import spring.project.domain.site.SiteUser;
+import spring.project.web.service.QuestionService;
+import spring.project.web.service.UserService;
 
 @RequiredArgsConstructor
 @Controller
@@ -51,21 +49,21 @@ public class QuestionController {
 		Page<Question> paging = this.questionService.getList(page, keywords);
 		model.addAttribute("paging", paging);
 		model.addAttribute("keywords",keywords);
-		return "question_list";
+		return "question/question_list";
 	}
 
 	@GetMapping(value = "/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
 		Question question = this.questionService.getQuestion(id);
 		model.addAttribute("question", question);
-		return "question_detail";
+		return "question/question_detail";
 	}
 
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/create")
 	public String questionCreate(QuestionForm questionForm, Principal principal) {
 
-		return "question_form";
+		return "question/question_form";
 	}
 
 	//아래위 같아도 상관없는 이유 => 메소드 오버로딩
@@ -77,7 +75,7 @@ public class QuestionController {
 		 * 만약 2개의 매개변수의 위치가 정확하지 않다면 @Valid만 적용이 되어 입력값 검증 실패 시 400 오류가 발생한다.
 		 * */
 		if (bindingResult.hasErrors()) {
-			return "question_form";
+			return "question/question_form";
 		}
 		SiteUser siteUser = this.userService.getUser(principal.getName());
 		this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
@@ -93,7 +91,7 @@ public class QuestionController {
 		}
 		questionForm.setSubject(question.getSubject());
 		questionForm.setContent(question.getContent());
-		return "question_form";
+		return "question/question_form";
 	}
 
 	//메소드 오버로딩 함
@@ -103,7 +101,7 @@ public class QuestionController {
 	public String questionModify(@Valid QuestionForm questionForm, BindingResult bindingResult,
 		Principal principal, @PathVariable("id") Integer id) {
 		if (bindingResult.hasErrors()) {
-			return "question_form";
+			return "question/question_form";
 		}
 		Question question = this.questionService.getQuestion(id);
 		if (!question.getAuthor().getUsername().equals(principal.getName())) {
