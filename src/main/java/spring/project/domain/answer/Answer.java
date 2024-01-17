@@ -1,39 +1,30 @@
 package spring.project.domain.answer;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import spring.project.domain.BaseTimeEntity;
 import spring.project.domain.question.Question;
-import spring.project.domain.site.SiteUser;
 
-@Data
+@Getter
+@NoArgsConstructor
 @Entity
-public class Answer {
+public class Answer extends BaseTimeEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
-	private LocalDateTime writeday;
-
 	@ManyToOne
-	private Question question;
-
-	@ManyToOne   //1대 다 관계 일 때 사용
-	private SiteUser author;
-	private LocalDateTime modifyDate;
-
-	@ManyToMany
-	Set<SiteUser> voter;
+	private Question question; //한 글에 여러개의 댓글이므로 1:N 관계, DB에서 외래키라고 보면댐
 }
