@@ -10,8 +10,8 @@ import jakarta.persistence.Entity;
 
 @SpringBootApplication
 @ComponentScan("spring.project.*")
-@EntityScan("spring,project.*")
-//@EnableJpaRepositories("spring.project.*")
+@EntityScan("spring.project.*")
+@EnableJpaRepositories("spring.project.*")
 public class MyToyApplication {
 
 	public static void main(String[] args) {

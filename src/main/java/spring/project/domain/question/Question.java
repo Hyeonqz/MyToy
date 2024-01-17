@@ -17,8 +17,8 @@ import spring.project.domain.BaseTimeEntity;
 import spring.project.domain.answer.Answer;
 
 @Getter
-@Entity
 @NoArgsConstructor
+@Entity
 public class Question extends BaseTimeEntity {
 
 	@Id
