@@ -18,7 +18,6 @@ public class QuestionDto {
 	private String content;
 
 	@Builder
-
 	public QuestionDto(String subject, String content) {
 		this.subject = subject;
 		this.content = content;

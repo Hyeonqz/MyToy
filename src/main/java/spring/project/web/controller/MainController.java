@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
 	@GetMapping("/")
-	@ResponseBody
-	public String index() {
-		return "index";
+	public String root() {
+		//로그인이 되어있으면 여기로
+		return "redirect:/question/list";
+
+		//로그인이 안돼 있을 경우 로그인창으로 넘기기.
 	}
 }
