@@ -1,4 +1,4 @@
-package spring.project.web.service;
+package spring.project.question.application;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,13 +6,11 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import spring.project.domain.question.Question;
-import spring.project.domain.question.QuestionRepository;
-import spring.project.web.dto.AnswerDto;
-import spring.project.web.dto.QuestionDto;
+import spring.project.question.domain.Question;
+import spring.project.question.repository.QuestionRepository;
+import spring.project.question.application.dto.request.QuestionRequestDto;
 
 @RequiredArgsConstructor
 @Service
@@ -22,15 +20,16 @@ public class QuestionService {
 	private final ModelMapper modelMapper;
 
 	// 다수의 Question 엔티티를 QuestionDto로 변환하는 메서드
-	private QuestionDto convertToDto(Question question) {
-		return modelMapper.map(question, QuestionDto.class);
+	private QuestionRequestDto convertToDto(Question question) {
+		return modelMapper.map(question, QuestionRequestDto.class);
 	}
 
 	// 다수의 Question 엔티티를 QuestionDto 리스트로 변환하는 메서드
-	public List<QuestionDto> getAllQuestionDtos() {
+	public List<QuestionRequestDto> getAllQuestionDtos() {
 		List<Question> questions = questionRepository.findAll();
 		return questions.stream()
-			.map(question -> convertToDto(question))
+			.map(this::convertToDto)
+			//.map(question -> convertToDto(question))
 			.collect(Collectors.toList());
 	}
 

@@ -1,4 +1,4 @@
-package spring.project.domain;
+package spring.project.answer.domain;
 
 import java.time.LocalDateTime;
 

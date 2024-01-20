@@ -1,4 +1,4 @@
-package spring.project.web.controller;
+package spring.project.answer.ui;
 
 import org.springframework.web.bind.annotation.RestController;
 

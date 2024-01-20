@@ -1,6 +1,4 @@
-package spring.project.domain.answer;
-
-import java.time.LocalDateTime;
+package spring.project.answer.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,8 +9,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.project.domain.BaseTimeEntity;
-import spring.project.domain.question.Question;
+import spring.project.question.domain.Question;
 
 @Getter
 @NoArgsConstructor

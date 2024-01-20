@@ -1,20 +1,17 @@
 package spring.project.toy.web.DB;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import spring.project.domain.question.Question;
-import spring.project.domain.question.QuestionRepository;
-import spring.project.web.dto.QuestionDto;
+import spring.project.question.domain.Question;
+import spring.project.question.repository.QuestionRepository;
 
 @SpringBootTest
 public class InsertTest {

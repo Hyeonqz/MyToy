@@ -1,9 +1,9 @@
-package spring.project.web.dto;
+package spring.project.answer.application.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.project.domain.answer.Answer;
+import spring.project.answer.domain.Answer;
 
 @Getter
 @NoArgsConstructor

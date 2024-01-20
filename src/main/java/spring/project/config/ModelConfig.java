@@ -1,4 +1,4 @@
-package spring.project.toy;
+package spring.project.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

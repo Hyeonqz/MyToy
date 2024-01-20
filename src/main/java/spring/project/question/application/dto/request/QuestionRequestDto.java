@@ -1,13 +1,13 @@
-package spring.project.web.dto;
+package spring.project.question.application.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.project.domain.question.Question;
+import spring.project.question.domain.Question;
 
 @Getter
 @NoArgsConstructor
-public class QuestionDto {
+public class QuestionRequestDto {
 
 	//Entity와 거의 유사한 형태인 Dto를 생성했다
 	//절대로 Entity클래스를 Request, Response 클래스로 사용해서는 안된다.
@@ -18,7 +18,7 @@ public class QuestionDto {
 	private String content;
 
 	@Builder
-	public QuestionDto(String subject, String content) {
+	public QuestionRequestDto(String subject, String content) {
 		this.subject = subject;
 		this.content = content;
 	}

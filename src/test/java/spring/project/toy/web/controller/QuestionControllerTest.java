@@ -14,11 +14,11 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import spring.project.domain.question.Question;
-import spring.project.domain.question.QuestionRepository;
-import spring.project.web.controller.QuestionController;
-import spring.project.web.dto.QuestionDto;
-import spring.project.web.service.QuestionService;
+import spring.project.question.domain.Question;
+import spring.project.question.repository.QuestionRepository;
+import spring.project.question.ui.QuestionController;
+import spring.project.question.application.dto.request.QuestionRequestDto;
+import spring.project.question.application.QuestionService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class QuestionControllerTest {
@@ -42,7 +42,7 @@ public class QuestionControllerTest {
 		String subject = "subject";
 		String content = "content";
 
-		QuestionDto questionDto = QuestionDto.builder()
+		QuestionRequestDto questionRequestDto = QuestionRequestDto.builder()
 			.subject(subject)
 			.content(content)
 			.build();
@@ -50,7 +50,7 @@ public class QuestionControllerTest {
 		String url = "http://localhost:" +port+"/api/v1/posts";
 
 		//when
-		ResponseEntity<Long> responseEntity = testRestTemplate.postForEntity(url, questionDto, Long.class);
+		ResponseEntity<Long> responseEntity = testRestTemplate.postForEntity(url, questionRequestDto, Long.class);
 		//then
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isGreaterThan(0L);
@@ -66,7 +66,7 @@ public class QuestionControllerTest {
 		QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
 		QuestionController questionController = new QuestionController((QuestionService)mockQuestionRepository);
 
-		QuestionDto questionDto = QuestionDto.builder()
+		QuestionRequestDto questionRequestDto = QuestionRequestDto.builder()
 			.subject("테스트 주제")
 			.content("테스트 내용")
 			.build();
