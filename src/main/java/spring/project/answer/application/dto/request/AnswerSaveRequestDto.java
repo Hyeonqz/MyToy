@@ -7,11 +7,12 @@ import spring.project.answer.domain.Answer;
 
 @Getter
 @NoArgsConstructor
-public class AnswerDto {
+@Builder
+public class AnswerSaveRequestDto {
 	private String content;
 
-	@Builder
-	public AnswerDto(String content) {
+
+	public AnswerSaveRequestDto(String content) {
 		this.content = content;
 	}
 

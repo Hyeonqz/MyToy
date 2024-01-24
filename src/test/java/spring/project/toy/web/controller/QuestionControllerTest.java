@@ -64,7 +64,7 @@ public class QuestionControllerTest {
 	void createQuestionTest() {
 		// Given
 		QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
-		QuestionController questionController = new QuestionController((QuestionService)mockQuestionRepository);
+		QuestionController questionController = new QuestionController((QuestionRepository)mockQuestionRepository);
 
 		QuestionRequestDto questionRequestDto = QuestionRequestDto.builder()
 			.subject("테스트 주제")

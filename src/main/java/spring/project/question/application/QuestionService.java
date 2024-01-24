@@ -1,5 +1,7 @@
 package spring.project.question.application;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,10 +29,28 @@ public class QuestionService {
 	// 다수의 Question 엔티티를 QuestionDto 리스트로 변환하는 메서드
 	public List<QuestionRequestDto> getAllQuestionDtos() {
 		List<Question> questions = questionRepository.findAll();
+
 		return questions.stream()
 			.map(this::convertToDto)
 			//.map(question -> convertToDto(question))
 			.collect(Collectors.toList());
+	}
+
+	//나만의 방법
+	public List<QuestionRequestDto> getListDto() {
+		List<Question> questionList = questionRepository.findAll();
+
+		List<QuestionRequestDto> questionRequestDtos = questionList.stream()
+			.map(question -> QuestionRequestDto.builder()
+				.subject(question.getSubject())
+				.content(question.getContent())
+				.build())
+			.collect(Collectors.toList());
+		return questionRequestDtos;
+	}
+
+	public List<QuestionRequestDto> getListDto2() {
+
 	}
 
 
