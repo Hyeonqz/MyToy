@@ -14,7 +14,7 @@ import spring.project.question.domain.Question;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Answer extends BaseTimeEntity {
+public class Answer{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

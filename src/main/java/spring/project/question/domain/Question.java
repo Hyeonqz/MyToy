@@ -12,7 +12,6 @@ import jakarta.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import spring.project.answer.domain.BaseTimeEntity;
 import spring.project.answer.domain.Answer;
 
 @Getter
@@ -40,4 +39,5 @@ public class Question extends BaseTimeEntity {
 		this.subject = subject;
 		this.content = content;
 	}
+
 }

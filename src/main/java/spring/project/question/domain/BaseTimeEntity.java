@@ -1,4 +1,4 @@
-package spring.project.answer.domain;
+package spring.project.question.domain;
 
 import java.time.LocalDateTime;
 
@@ -13,12 +13,12 @@ import lombok.Getter;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseTimeEntity {
+public abstract class BaseTimeEntity {
+
+	//모든 Entity의 상위 클래스가 되어 Entity들의 생성날짜, 수정날짜를 관리한다.
 
 	@CreatedDate
-	private LocalDateTime CreatedDate;
-
-	//조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
+	private LocalDateTime createDate;
 	@LastModifiedDate
 	private LocalDateTime modifiedDate;
 }

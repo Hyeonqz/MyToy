@@ -49,9 +49,6 @@ public class QuestionService {
 		return questionRequestDtos;
 	}
 
-	public List<QuestionRequestDto> getListDto2() {
-
-	}
 
 
 }

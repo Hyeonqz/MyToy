@@ -23,10 +23,10 @@ public class QuestionRequestDto {
 		this.content = content;
 	}
 
-/*	public Question toEntity() {
+	public Question toEntity() {
 		return Question.builder()
 			.subject(subject)
 			.content(content)
 			.build();
-	}*/
+	}
 }

@@ -3,6 +3,7 @@ package spring.project.toy.web.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -61,21 +62,23 @@ public class QuestionControllerTest {
 	}
 
 	@Test
-	void createQuestionTest() {
-		// Given
-		QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
-		QuestionController questionController = new QuestionController((QuestionRepository)mockQuestionRepository);
+	public void BaseTimeEntity_등록() {
+		//givne
+		LocalDateTime now = LocalDateTime.of(2024,01,24,0,0,0);
+		questionRepository.save(Question.builder()
+			.subject("subject")
+			.content("content")
+			.build());
 
-		QuestionRequestDto questionRequestDto = QuestionRequestDto.builder()
-			.subject("테스트 주제")
-			.content("테스트 내용")
-			.build();
+		//when
+		List<Question> questionlist = questionRepository.findAll();
 
-		// When
-		//String result = questionController.생성메서드 넣기
+		//then
+		Question question = questionlist.get(0);
+		System.out.println(question.getCreateDate() + " " +question.getModifiedDate());
 
-		// Then
-		verify(mockQuestionRepository, times(1)).save(any());
-		// 적절한 결과 확인 로직을 추가해야 합니다.
+		assertThat(question.getCreateDate()).isAfter(now);
+		assertThat(question.getModifiedDate()).isAfter(now);
 	}
+
 }
